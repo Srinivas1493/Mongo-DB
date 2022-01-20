@@ -1,0 +1,97 @@
+Mongo DB- No Sql
+Uses Json like syntax
+Adv: In Relational DB like SQl, Postgre SQL we need to figure out everything from schema,table and including the field that are used
+In Mongo we need to plan structure and collection but we neeed not predefine anything before building the application
+Scaling is easier
+Faster to use
+
+-----------------------------------------------
+Row-- Document
+Table --Collection
+DB-- DB
+-------
+** To List dbs
+>show dbs
+** To create db
+use srinidb
+**To list the current db that you are in
+>db
+Note: Unless you create a collection, the dbs are not listed
+------
+To create collections
+>db.createCollection('Srinicollection')
+>db.slstudent.insert({name:'Admin'})
+
+>db.createCollection('student',{capped:true,size:5242880,max:5})
+But the advantage of using createCollection keyword is given below:\
+-->We can control the no of records that can be inserted inside the collections
+-->We can control the size of the collection as well.
+
+To confirm the no of rows/document inside the collection, use FIND
+> db.slstudent.find()
+{ "_id" : ObjectId("618a9deb329f2a2cbeb37c33"), "name" : "Admin" }
+-------------------------------------------------
+Drop Database:
+db.dropDatabase()
+--------------------
+INSERT MANY
+
+ db.student.insertMany(
+... [
+... {
+... Name: 'Deepa',
+... Age: '30'
+... },
+... {
+... Name:'Vidya',
+... Age:23
+... }
+... ]
+... )
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6197dd891aea041e40aa5f37"),
+                ObjectId("6197dd891aea041e40aa5f38")
+        ]
+}
+> db.student.find()
+{ "_id" : ObjectId("6197dac61aea041e40aa5f35"), "Address" : "Chennai" }
+{ "_id" : ObjectId("6197db201aea041e40aa5f36"), "Name" : "Srini", "Age" : "28" }
+{ "_id" : ObjectId("6197dd891aea041e40aa5f37"), "Name" : "Deepa", "Age" : "30" }
+{ "_id" : ObjectId("6197dd891aea041e40aa5f38"), "Name" : "Vidya", "Age" : 23 }
+
+
+> db.student.find().pretty()
+{ "_id" : ObjectId("6197dac61aea041e40aa5f35"), "Address" : "Chennai" }
+{
+        "_id" : ObjectId("6197db201aea041e40aa5f36"),
+        "Name" : "Srini",
+        "Age" : "28"
+}
+{
+        "_id" : ObjectId("6197dd891aea041e40aa5f37"),
+        "Name" : "Deepa",
+        "Age" : "30"
+}
+{
+        "_id" : ObjectId("6197dd891aea041e40aa5f38"),
+        "Name" : "Vidya",
+        "Age" : 23
+}
+-----------------------------------
+Sort Function by descending
+
+db.student.find().sort(
+{
+Name:-1
+}
+)
+
+Ascending Sort
+db.student.find().sort(
+{
+Name:1
+}
+)
+--------
